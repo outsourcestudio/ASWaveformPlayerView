@@ -23,7 +23,7 @@ public class ASWaveformPlayerView: UIView {
   //MARK: Private properties
   private var playerToken: Any?
   
-  private var audioPlayer: AVPlayer!
+  public var audioPlayer: AVPlayer!
   
   private var audioAnalyzer = AudioAnalyzer()
   
@@ -143,13 +143,40 @@ public class ASWaveformPlayerView: UIView {
     }
     
   }
+    
+    @objc public func play(){
+        if audioPlayer.rate == 0 {
+          audioPlayer.play()
+        } else {
+          audioPlayer.pause()
+        }
+    }
   
   @objc private func handleTap(_ recognizer: UITapGestureRecognizer) {
-    if audioPlayer.rate == 0 {
-      audioPlayer.play()
-    } else {
-      audioPlayer.pause()
+    
+    if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
+      
+      let xLocation = recognizer.location(in: self).x
+      
+      let percentageInSelf = Double(xLocation / bounds.width)
+      
+      let totalAudioDurationSeconds = CMTimeGetSeconds(totalAudioDuration)
+      
+      let scrubbedDutation = totalAudioDurationSeconds * percentageInSelf
+      
+      let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, 1000)
+      
+      audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+        self?.shouldAutoUpdateWaveform = true
+      })
+      
     }
+    
+//    if audioPlayer.rate == 0 {
+//      audioPlayer.play()
+//    } else {
+//      audioPlayer.pause()
+//    }
   }
   
   private func populateWithData() {
