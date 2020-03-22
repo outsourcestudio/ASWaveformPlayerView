@@ -41,21 +41,21 @@
 		2082F4B355D92977951269D28AD8079F /* Pods-ASWaveformPlayerView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASWaveformPlayerView_Example-frameworks.sh"; sourceTree = "<group>"; };
 		29F206B84F82D0868BBEF1A5E30E953F /* Pods-ASWaveformPlayerView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASWaveformPlayerView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		330387AF0A218754A7860D2B59884BA7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A89601291ED6AA5B9A4A9BD4FB89F46 /* Pods-ASWaveformPlayerView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ASWaveformPlayerView_Example.modulemap"; sourceTree = "<group>"; };
+		3A89601291ED6AA5B9A4A9BD4FB89F46 /* Pods-ASWaveformPlayerView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ASWaveformPlayerView_Example.modulemap"; sourceTree = "<group>"; };
 		48298A68D4B2446B21B04088987C13F6 /* AudioAnalyser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AudioAnalyser.swift; path = ASWaveformPlayerView/Classes/AudioAnalyser.swift; sourceTree = "<group>"; };
 		566DF39D191CD70E401D496EA1A51D9B /* Pods-ASWaveformPlayerView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ASWaveformPlayerView_Example-dummy.m"; sourceTree = "<group>"; };
 		5A64F4002346F16CB81C45B142FCB61E /* Pods-ASWaveformPlayerView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASWaveformPlayerView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		5A661C1B89E3754C5DA7156A81A32E56 /* Pods-ASWaveformPlayerView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ASWaveformPlayerView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5F99B9CEC1FB141EBC874116B00EBCB6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		636FD45E662EF4074FED7EBAD0F5B6CF /* Pods_ASWaveformPlayerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ASWaveformPlayerView_Example.framework; path = "Pods-ASWaveformPlayerView_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		636FD45E662EF4074FED7EBAD0F5B6CF /* Pods_ASWaveformPlayerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASWaveformPlayerView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69066B9406A43DDB2BD2FA80CC8C29D8 /* Pods-ASWaveformPlayerView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASWaveformPlayerView_Example-resources.sh"; sourceTree = "<group>"; };
 		784689540E4E8A15F352F8802A2B0747 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		78C98771308AE0C7EE2398F7DFF9BCA0 /* ASWaveformPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ASWaveformPlayerView.swift; path = ASWaveformPlayerView/Classes/ASWaveformPlayerView.swift; sourceTree = "<group>"; };
 		79784DE904C66999FD9CDF2F85C99EC7 /* Pods-ASWaveformPlayerView_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ASWaveformPlayerView_Tests-dummy.m"; sourceTree = "<group>"; };
 		8579007D531C1D69A7A41BDC04AAF011 /* ASWaveformPlayerView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ASWaveformPlayerView-umbrella.h"; sourceTree = "<group>"; };
 		8D07E713553CF89668969893E1A90408 /* Pods-ASWaveformPlayerView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASWaveformPlayerView_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		947E221311421564751720A16B6F0923 /* Pods-ASWaveformPlayerView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ASWaveformPlayerView_Tests.modulemap"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		947E221311421564751720A16B6F0923 /* Pods-ASWaveformPlayerView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ASWaveformPlayerView_Tests.modulemap"; sourceTree = "<group>"; };
 		9FA1AD71721199138DD452178787E90A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		A114F2E2972D9699046368A811C3E20F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A799A6F200828D5B60BA7C51ADFB2707 /* Pods-ASWaveformPlayerView_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ASWaveformPlayerView_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -63,11 +63,11 @@
 		B40090106463C223FD4120947E02378E /* ASWaveformPlayerView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ASWaveformPlayerView-dummy.m"; sourceTree = "<group>"; };
 		B6007B478E2B798AECD3D0CEAEEE3FB3 /* Pods-ASWaveformPlayerView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ASWaveformPlayerView_Example-umbrella.h"; sourceTree = "<group>"; };
 		B63943BC0D1C8C22F2420C05BF024D6E /* ASWaveformPlayerView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ASWaveformPlayerView-prefix.pch"; sourceTree = "<group>"; };
-		C334DCA685923DCDB3C137854756E21E /* ASWaveformPlayerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ASWaveformPlayerView.framework; path = ASWaveformPlayerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C334DCA685923DCDB3C137854756E21E /* ASWaveformPlayerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASWaveformPlayerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C391C6605920994FDC2B2275FD4407ED /* Pods-ASWaveformPlayerView_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ASWaveformPlayerView_Tests-resources.sh"; sourceTree = "<group>"; };
 		CC2558966EFE1CD0D11411E270AD9544 /* Pods-ASWaveformPlayerView_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ASWaveformPlayerView_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		DBDF27B3A2BA152E4D7FE183C9C58C15 /* Pods_ASWaveformPlayerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ASWaveformPlayerView_Tests.framework; path = "Pods-ASWaveformPlayerView_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC8A9B9439731E1B3A4F252B553A2D2E /* ASWaveformPlayerView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ASWaveformPlayerView.modulemap; sourceTree = "<group>"; };
+		DBDF27B3A2BA152E4D7FE183C9C58C15 /* Pods_ASWaveformPlayerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASWaveformPlayerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC8A9B9439731E1B3A4F252B553A2D2E /* ASWaveformPlayerView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ASWaveformPlayerView.modulemap; sourceTree = "<group>"; };
 		EF4675C3C5856576391F3FB2ED110F14 /* ASWaveformPlayerView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ASWaveformPlayerView.xcconfig; sourceTree = "<group>"; };
 		FA5FF56EFF7B21220CF9896CFFF19306 /* Pods-ASWaveformPlayerView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ASWaveformPlayerView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -317,6 +317,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
@@ -535,6 +536,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.5;
 				MODULEMAP_FILE = "Target Support Files/ASWaveformPlayerView/ASWaveformPlayerView.modulemap";
 				PRODUCT_NAME = ASWaveformPlayerView;
 				SDKROOT = iphoneos;
@@ -667,6 +669,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.5;
 				MODULEMAP_FILE = "Target Support Files/ASWaveformPlayerView/ASWaveformPlayerView.modulemap";
 				PRODUCT_NAME = ASWaveformPlayerView;
 				SDKROOT = iphoneos;
