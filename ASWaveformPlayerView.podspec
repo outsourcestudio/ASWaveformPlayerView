@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASWaveformPlayerView'
-  s.version          = '0.1.3'
+  s.version          = '0.1.6'
   s.summary          = 'Audio waveform view with playback functionality.'
 
 # This description is used to generate tags and improve search results.
@@ -33,11 +33,11 @@ allowSpacing - inserts little spacing between bars in waveform.
 
                        DESC
 
-  s.homepage         = 'https://github.com/alexey-savchenko/ASWaveformPlayerView'
+  s.homepage         = 'https://github.com/outsourcestudio/ASWaveformPlayerView.git'
   s.screenshots     = 'https://i.imgur.com/GAKHlxq.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'alexey-savchenko' => 'alexey.savchenko.home@gmail.com' }
-  s.source           = { :git => 'https://github.com/alexey-savchenko/ASWaveformPlayerView.git',
+  s.source           = { :git => 'https://github.com/outsourcestudio/ASWaveformPlayerView.git',
                          :branch => "master",
                          :tag => s.version.to_s }
 

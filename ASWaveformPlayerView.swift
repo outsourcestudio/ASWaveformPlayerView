@@ -23,7 +23,7 @@ public class ASWaveformPlayerView: UIView {
   //MARK: Private properties
   private var playerToken: Any?
   
-  private var audioPlayer: AVPlayer!
+  pu var audioPlayer: AVPlayer!
   
   private var audioAnalyzer = AudioAnalyzer()
   
