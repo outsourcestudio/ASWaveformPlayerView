@@ -31,7 +31,7 @@ public class ASWaveformPlayerView: UIView {
   
   private var waveforms = [CALayer]()
   
-  private var currentPlaybackTime: CMTime?
+  public var currentPlaybackTime: CMTime?
   
   private var shouldAutoUpdateWaveform = true
   
@@ -178,6 +178,14 @@ public class ASWaveformPlayerView: UIView {
 //      audioPlayer.pause()
 //    }
   }
+    
+    @objc public func jumpToStart(){
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0, 1000)
+        
+        audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+          self?.shouldAutoUpdateWaveform = true
+        })
+    }
   
   private func populateWithData() {
     clear()
