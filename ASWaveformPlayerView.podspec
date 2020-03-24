@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASWaveformPlayerView'
-  s.version          = '0.1.9'
+  s.version          = '0.2.0'
   s.summary          = 'Audio waveform view with playback functionality.'
 
 # This description is used to generate tags and improve search results.
