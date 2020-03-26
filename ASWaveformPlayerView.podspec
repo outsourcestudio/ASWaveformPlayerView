@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ASWaveformPlayerView'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Audio waveform view with playback functionality.'
 
 # This description is used to generate tags and improve search results.
@@ -43,7 +43,7 @@ allowSpacing - inserts little spacing between bars in waveform.
 
   s.social_media_url = 'https://twitter.com/Alex_Svch'
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'ASWaveformPlayerView/Classes/**/*'
   
