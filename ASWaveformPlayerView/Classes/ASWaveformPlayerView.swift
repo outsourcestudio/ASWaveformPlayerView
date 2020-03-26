@@ -237,6 +237,7 @@ public class ASWaveformPlayerView: UIView {
                                   y: bounds.height / 2)
       
       barLayer.backgroundColor = self.normalColor.cgColor
+        barLayer.cornerRadius = barWidth / 2.0
       
       self.layer.addSublayer(barLayer)
       self.waveforms.append(barLayer)
@@ -317,14 +318,12 @@ public class ASWaveformPlayerView: UIView {
     upperOverlayLayer.frame = CGRect(origin: .zero,
                                      size: CGSize(width: maskLayer.bounds.width,
                                                   height: (maskLayer.bounds.height / 2) - 0.25))
-    upperOverlayLayer.cornerRadius = maskLayer.bounds.width / 2.0
     
     
     bottomOverlayLayer.frame = CGRect(origin: CGPoint(x: 0,
                                                       y: (maskLayer.bounds.height / 2) + 0.25),
                                       size: CGSize(width: maskLayer.bounds.width,
                                                    height: maskLayer.bounds.height / 2))
-    bottomOverlayLayer.cornerRadius = maskLayer.bounds.width / 2.0
     
     layer.mask = maskLayer
     
