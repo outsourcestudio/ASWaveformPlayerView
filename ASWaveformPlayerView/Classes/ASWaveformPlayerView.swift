@@ -57,7 +57,7 @@ public class ASWaveformPlayerView: UIView {
     
     super.init(frame: .zero)
     
-    playerToken = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 60),
+    playerToken = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 60),
                                                       queue: .main) { [weak self] (time) in
                                                         
                                                         // Update waveform with current playback time value.
@@ -130,7 +130,7 @@ public class ASWaveformPlayerView: UIView {
         
         let scrubbedDutation = totalAudioDurationSeconds * percentageInSelf
         
-        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, preferredTimescale: 1000)
         
         audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
           self?.shouldAutoUpdateWaveform = true
@@ -164,7 +164,7 @@ public class ASWaveformPlayerView: UIView {
       
       let scrubbedDutation = totalAudioDurationSeconds * percentageInSelf
       
-      let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, preferredTimescale: 1000)
       
       audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
         self?.shouldAutoUpdateWaveform = true
@@ -180,7 +180,7 @@ public class ASWaveformPlayerView: UIView {
   }
     
     @objc public func jumpToStart(){
-        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0, preferredTimescale: 1000)
         
         audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
           self?.shouldAutoUpdateWaveform = true
@@ -192,9 +192,9 @@ public class ASWaveformPlayerView: UIView {
         
         let jumpStep = CMTimeGetSeconds(totalAudioDuration) / 10
          
-        let xLocation = self.currentPlaybackTime! + CMTimeMake(Int64(jumpStep), 1)
+        let xLocation = self.currentPlaybackTime! + CMTimeMake(value: Int64(jumpStep), timescale: 1)
         if xLocation > totalAudioDuration {
-            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), 1000)
+            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), preferredTimescale: 1000)
             
             audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
               self?.shouldAutoUpdateWaveform = true
@@ -215,7 +215,7 @@ public class ASWaveformPlayerView: UIView {
     let barWidth: CGFloat
     
     if allowSpacing {
-      barWidth = bounds.width / CGFloat(waveformDataArray.count) - 0.5
+        barWidth = bounds.width / CGFloat(waveformDataArray.count) - 1.5//0.5
     } else {
       barWidth = bounds.width / CGFloat(waveformDataArray.count)
     }
@@ -223,8 +223,9 @@ public class ASWaveformPlayerView: UIView {
     //Make initial offset equal to half width of bar.
     var offset: CGFloat = (bounds.width / CGFloat(waveformDataArray.count)) / 2
     //Iterate through waveformDataArray to calculate size and positions of waveform bars.
+        
     for value in waveformDataArray {
-      
+        
       let waveformBarRect = CGRect(x: offset,
                                    y:   bounds.height / 2,
                                    width: barWidth,
@@ -245,7 +246,6 @@ public class ASWaveformPlayerView: UIView {
       offset += self.frame.width / CGFloat(waveformDataArray.count)
       
     }
-    
   }
   
   private func updatePlotWith(_ location: Float) {
@@ -315,15 +315,18 @@ public class ASWaveformPlayerView: UIView {
     maskLayer.addSublayer(upperOverlayLayer)
     maskLayer.addSublayer(bottomOverlayLayer)
     
+    var minValue: CGFloat = 5.0
+    if ((maskLayer.bounds.height / 2) - 0.25) > minValue {minValue = (maskLayer.bounds.height / 2) - 0.25}
+    
     upperOverlayLayer.frame = CGRect(origin: .zero,
                                      size: CGSize(width: maskLayer.bounds.width,
-                                                  height: (maskLayer.bounds.height / 2) - 0.25))
+                                                  height: minValue - 0.25)) //(maskLayer.bounds.height / 2) - 0.25
     
     
     bottomOverlayLayer.frame = CGRect(origin: CGPoint(x: 0,
                                                       y: (maskLayer.bounds.height / 2) + 0.25),
                                       size: CGSize(width: maskLayer.bounds.width,
-                                                   height: maskLayer.bounds.height / 2))
+                                                   height: minValue)) //maskLayer.bounds.height / 2
     
     layer.mask = maskLayer
     
