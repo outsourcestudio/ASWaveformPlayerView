@@ -226,10 +226,13 @@ public class ASWaveformPlayerView: UIView {
         
     for value in waveformDataArray {
         
+        
+        var heightCustom = -CGFloat(value * 10.0)
+        if heightCustom < 10.0 {heightCustom = 10.0}
       let waveformBarRect = CGRect(x: offset,
                                    y:   bounds.height / 2,
                                    width: barWidth,
-                                   height: -CGFloat(value))
+                                   height: heightCustom)
       
       let barLayer = CALayer()
       barLayer.drawsAsynchronously = true
@@ -315,18 +318,17 @@ public class ASWaveformPlayerView: UIView {
     maskLayer.addSublayer(upperOverlayLayer)
     maskLayer.addSublayer(bottomOverlayLayer)
     
-    var minValue: CGFloat = 5.0
-    if ((maskLayer.bounds.height / 2) - 0.25) > minValue {minValue = (maskLayer.bounds.height / 2) - 0.25}
+    
     
     upperOverlayLayer.frame = CGRect(origin: .zero,
                                      size: CGSize(width: maskLayer.bounds.width,
-                                                  height: minValue - 0.25)) //(maskLayer.bounds.height / 2) - 0.25
+                                                  height: (maskLayer.bounds.height / 2) - 0.25))
     
     
     bottomOverlayLayer.frame = CGRect(origin: CGPoint(x: 0,
                                                       y: (maskLayer.bounds.height / 2) + 0.25),
                                       size: CGSize(width: maskLayer.bounds.width,
-                                                   height: minValue)) //maskLayer.bounds.height / 2
+                                                   height: maskLayer.bounds.height / 2))
     
     layer.mask = maskLayer
     
