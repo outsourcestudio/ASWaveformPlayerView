@@ -192,7 +192,30 @@ public class ASWaveformPlayerView: UIView {
         
         let jumpStep = CMTimeGetSeconds(totalAudioDuration) / 10
          
-        let xLocation = self.currentPlaybackTime! + CMTimeMake(value: Int64(jumpStep), timescale: 1)
+        guard let t_currentPlaybackTime = self.currentPlaybackTime else {
+            return
+        }
+        let xLocation = t_currentPlaybackTime + CMTimeMake(value: Int64(jumpStep), timescale: 1)
+        if xLocation > totalAudioDuration {
+            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), preferredTimescale: 1000)
+            
+            audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        } else {
+            
+            audioPlayer.seek(to: xLocation, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        }
+         
+       }
+    }
+    
+    @objc public func jumpFrom(seconds: Double){
+       if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
+        
+        let xLocation = CMTime(seconds: Double(seconds), preferredTimescale: 1)
         if xLocation > totalAudioDuration {
             let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), preferredTimescale: 1000)
             
@@ -227,8 +250,12 @@ public class ASWaveformPlayerView: UIView {
     for value in waveformDataArray {
         
         
-        var heightCustom = -CGFloat(value * 10.0)
-        if heightCustom < 10.0 {heightCustom = 10.0}
+        var heightCustom = -CGFloat(value)
+        if heightCustom > -10.0 && heightCustom < 0.0 {heightCustom = -10.0}
+        if heightCustom < -50.0 {heightCustom = -50.0}
+        if heightCustom < 10.0 && heightCustom > 0.0 {heightCustom = 10.0}
+        if heightCustom > 50.0 {heightCustom = 10.0}
+
       let waveformBarRect = CGRect(x: offset,
                                    y:   bounds.height / 2,
                                    width: barWidth,
@@ -256,6 +283,9 @@ public class ASWaveformPlayerView: UIView {
     let percentageInSelf = location / Float(bounds.width)
     
     let waveformsToBeRecolored = Float(waveforms.count) * percentageInSelf
+    if waveformsToBeRecolored < 0 {
+        return
+    }
     
     for (idx, item) in waveforms.enumerated() {
       
@@ -313,7 +343,7 @@ public class ASWaveformPlayerView: UIView {
     bottomOverlayLayer.backgroundColor = UIColor.black.cgColor
     
     upperOverlayLayer.opacity = 1
-    bottomOverlayLayer.opacity = 0.75
+    bottomOverlayLayer.opacity = 1//0.75
     
     maskLayer.addSublayer(upperOverlayLayer)
     maskLayer.addSublayer(bottomOverlayLayer)

@@ -39,8 +39,8 @@ public class ASWaveformPlayerView: UIView {
   
   //MARK: Initialization
   public init(audioURL: URL,
-              sampleCount: Int,
-              amplificationFactor: Float) throws {
+       sampleCount: Int,
+       amplificationFactor: Float) throws {
     
     guard sampleCount > 0 else {
       throw WaveFormViewInitError.incorrectSampleCount
@@ -57,7 +57,7 @@ public class ASWaveformPlayerView: UIView {
     
     super.init(frame: .zero)
     
-    playerToken = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 60),
+    playerToken = audioPlayer.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 60),
                                                       queue: .main) { [weak self] (time) in
                                                         
                                                         // Update waveform with current playback time value.
@@ -102,9 +102,9 @@ public class ASWaveformPlayerView: UIView {
     
   }
   
-  
-  
-  @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
+
+
+  @objc private func handlePan(_ recognizer: UIPanGestureRecognizer) {
     
     switch recognizer.state {
       
@@ -130,21 +130,29 @@ public class ASWaveformPlayerView: UIView {
         
         let scrubbedDutation = totalAudioDurationSeconds * percentageInSelf
         
-        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, preferredTimescale: 1000)
         
         audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
           self?.shouldAutoUpdateWaveform = true
         })
         
       }
-      
+
     default:
       break
     }
     
   }
+    
+    @objc public func play(){
+        if audioPlayer.rate == 0 {
+          audioPlayer.play()
+        } else {
+          audioPlayer.pause()
+        }
+    }
   
-  @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+  @objc private func handleTap(_ recognizer: UITapGestureRecognizer) {
     
     if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
       
@@ -156,7 +164,7 @@ public class ASWaveformPlayerView: UIView {
       
       let scrubbedDutation = totalAudioDurationSeconds * percentageInSelf
       
-      let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(scrubbedDutation, preferredTimescale: 1000)
       
       audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
         self?.shouldAutoUpdateWaveform = true
@@ -171,20 +179,57 @@ public class ASWaveformPlayerView: UIView {
 //    }
   }
     
-    @objc public func play(){
-        if audioPlayer.rate == 0 {
-          audioPlayer.play()
-        } else {
-          audioPlayer.pause()
-        }
-    }
-    
     @objc public func jumpToStart(){
-        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0, 1000)
+        let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0, preferredTimescale: 1000)
         
         audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
           self?.shouldAutoUpdateWaveform = true
         })
+    }
+    
+    @objc public func jumpNext(){
+       if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
+        
+        let jumpStep = CMTimeGetSeconds(totalAudioDuration) / 10
+         
+        guard let t_currentPlaybackTime = self.currentPlaybackTime else {
+            return
+        }
+        let xLocation = t_currentPlaybackTime + CMTimeMake(value: Int64(jumpStep), timescale: 1)
+        if xLocation > totalAudioDuration {
+            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), preferredTimescale: 1000)
+            
+            audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        } else {
+            
+            audioPlayer.seek(to: xLocation, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        }
+         
+       }
+    }
+    
+    @objc public func jumpFrom(seconds: Double){
+       if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
+        
+        let xLocation = CMTime(seconds: Double(seconds), preferredTimescale: 1)
+        if xLocation > totalAudioDuration {
+            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(CMTimeGetSeconds(totalAudioDuration), preferredTimescale: 1000)
+            
+            audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        } else {
+            
+            audioPlayer.seek(to: xLocation, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        }
+         
+       }
     }
   
   private func populateWithData() {
@@ -193,7 +238,7 @@ public class ASWaveformPlayerView: UIView {
     let barWidth: CGFloat
     
     if allowSpacing {
-      barWidth = bounds.width / CGFloat(waveformDataArray.count) - 0.5
+        barWidth = bounds.width / CGFloat(waveformDataArray.count) - 1.5//0.5
     } else {
       barWidth = bounds.width / CGFloat(waveformDataArray.count)
     }
@@ -201,12 +246,20 @@ public class ASWaveformPlayerView: UIView {
     //Make initial offset equal to half width of bar.
     var offset: CGFloat = (bounds.width / CGFloat(waveformDataArray.count)) / 2
     //Iterate through waveformDataArray to calculate size and positions of waveform bars.
+        
     for value in waveformDataArray {
-      
+        
+        
+        var heightCustom = -CGFloat(value)
+        if heightCustom > -10.0 && heightCustom < 0.0 {heightCustom = -10.0}
+        if heightCustom < -50.0 {heightCustom = -50.0}
+        if heightCustom < 10.0 && heightCustom > 0.0 {heightCustom = 10.0}
+        if heightCustom > 50.0 {heightCustom = 10.0}
+
       let waveformBarRect = CGRect(x: offset,
                                    y:   bounds.height / 2,
                                    width: barWidth,
-                                   height: -CGFloat(value))
+                                   height: heightCustom)
       
       let barLayer = CALayer()
       barLayer.drawsAsynchronously = true
@@ -215,6 +268,7 @@ public class ASWaveformPlayerView: UIView {
                                   y: bounds.height / 2)
       
       barLayer.backgroundColor = self.normalColor.cgColor
+        barLayer.cornerRadius = barWidth / 2.0
       
       self.layer.addSublayer(barLayer)
       self.waveforms.append(barLayer)
@@ -222,14 +276,16 @@ public class ASWaveformPlayerView: UIView {
       offset += self.frame.width / CGFloat(waveformDataArray.count)
       
     }
-    
   }
   
-  func updatePlotWith(_ location: Float) {
+  private func updatePlotWith(_ location: Float) {
     
     let percentageInSelf = location / Float(bounds.width)
     
     let waveformsToBeRecolored = Float(waveforms.count) * percentageInSelf
+    if waveformsToBeRecolored < 0 {
+        return
+    }
     
     for (idx, item) in waveforms.enumerated() {
       
@@ -243,7 +299,7 @@ public class ASWaveformPlayerView: UIView {
     
   }
   
-  func updatePlotWith(_ currentTime: CMTime) {
+  private func updatePlotWith(_ currentTime: CMTime) {
     
     guard shouldAutoUpdateWaveform == true else {
       return
@@ -275,7 +331,7 @@ public class ASWaveformPlayerView: UIView {
     
   }
   
-  func addOverlay() {
+  private func addOverlay() {
     
     let maskLayer = CALayer()
     maskLayer.frame = bounds
@@ -287,14 +343,17 @@ public class ASWaveformPlayerView: UIView {
     bottomOverlayLayer.backgroundColor = UIColor.black.cgColor
     
     upperOverlayLayer.opacity = 1
-    bottomOverlayLayer.opacity = 0.75
+    bottomOverlayLayer.opacity = 1//0.75
     
     maskLayer.addSublayer(upperOverlayLayer)
     maskLayer.addSublayer(bottomOverlayLayer)
     
+    
+    
     upperOverlayLayer.frame = CGRect(origin: .zero,
                                      size: CGSize(width: maskLayer.bounds.width,
                                                   height: (maskLayer.bounds.height / 2) - 0.25))
+    
     
     bottomOverlayLayer.frame = CGRect(origin: CGPoint(x: 0,
                                                       y: (maskLayer.bounds.height / 2) + 0.25),
@@ -306,13 +365,13 @@ public class ASWaveformPlayerView: UIView {
   }
   
   /// Reset progress of playback and waveform
-  func reset() {
+  public func reset() {
     waveforms.forEach {
       $0.backgroundColor = normalColor.cgColor
     }
   }
   
-  func clear() {
+  public func clear() {
     layer.sublayers?.forEach {
       $0.removeFromSuperlayer()
     }
