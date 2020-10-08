@@ -212,6 +212,31 @@ public class ASWaveformPlayerView: UIView {
        }
     }
     
+    @objc public func jumpBack(){
+       if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
+        
+        let jumpStep = CMTimeGetSeconds(totalAudioDuration) / 10
+         
+        guard let t_currentPlaybackTime = self.currentPlaybackTime else {
+            return
+        }
+        let xLocation = t_currentPlaybackTime - CMTimeMake(value: Int64(jumpStep), timescale: 1)
+        if xLocation < CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000) {
+            let scrubbedDutationMediaTime = CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000)
+            
+            audioPlayer.seek(to: scrubbedDutationMediaTime, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        } else {
+            
+            audioPlayer.seek(to: xLocation, completionHandler: { [weak self] (_) in
+              self?.shouldAutoUpdateWaveform = true
+            })
+        }
+         
+       }
+    }
+    
     @objc public func jumpFrom(seconds: Double){
        if let totalAudioDuration = audioPlayer.currentItem?.asset.duration {
         
